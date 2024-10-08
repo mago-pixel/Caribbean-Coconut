@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descubra o Caribe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+        }
+        header {
+            background-color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .logo {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            height: 100px;
+        }
+        .title-image {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0 20px 50px;
+        }
+        .separator {
+            height: 6px;
+            background-color: lightgreen;
+            margin-top: 10px;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 50px;
+        }
+        .nav-buttons {
+            display: flex;
+        }
+        .nav-button {
+            background-color: #00BFFF;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin: 0 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .nav-button:hover {
+            background-color: #0080B3;
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+        }
+        .search-input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .search-button {
+            padding: 10px;
+            border: none;
+            background-color: #00BFFF;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 5px;
+            transition: background-color 0.3s;
+        }
+        .search-button:hover {
+            background-color: #0080B3;
+        }
+        .introduction {
+            font-family: 'Lora', serif;
+            font-size: 1.2em;
+            color: white;
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #00BFFF;
+            transition: background-color 0.3s ease;
+        }
+        .introduction:hover {
+            background-color: #32CD32;
+        }
+        .carousel {
+            position: relative;
+            max-width: 100%;
+            margin: 20px auto;
+            overflow: hidden;
+            height: 600px;
+        }
+        .carousel-video {
+            display: none;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .carousel video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.6);
+        }
+        .carousel-text {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Lora', serif;
+            font-size: 1.8em;
+            text-align: center;
+        }
+        .explore-button {
+            display: none;
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px 20px;
+            border: 2px solid white;
+            background-color: transparent;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.125em;
+            font-weight: 700;
+            letter-spacing: 0.3em;
+            transition: border-color 0.3s ease;
+            z-index: 10;
+        }
+        .explore-button:hover {
+            border-color: #00BFFF;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #00BFFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            margin: 20px auto;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0080B3;
+        }
+        .fade {
+            animation: fade 1s;
+        }
+        @keyframes fade {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+        .fade-out {
+            animation: fadeOut 1s forwards;
+        }
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 36px;
+            color: white;
+        }
+        .prev {
+            left: 10px;
+        }
+        .next {
+            right: 10px;
+        }
+        main {
+            padding: 20px;
+            text-align: justify;
+        }
+        .about-section {
+            background-color: #32CD32;
+            border: 2px solid #32CD32;
+            padding: 20px;
+            border-radius: 8px;
+            color: white;
+            font-family: 'Lora', serif;
+            text-align: center;
+            margin: 20px 0;
+            display: none;
+            opacity: 0;
+            transition: opacity 2s;
+        }
+        .about-section.visible {
+            display: block;
+            opacity: 1;
+        }
+        .learn-more-button {
+            background-color: #00BFFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            margin: 40px auto;
+            display: block;
+            width: fit-content;
+            transition: background-color 0.3s ease;
+        }
+        .learn-more-button:hover {
+            background-color: #0080B3;
+        }
+        .card-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .card {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: 200px;
+            margin: 10px;
+            text-align: center;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .image_container {
+            height: 100px;
+            margin-bottom: 10px;
+        }
+        .image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .price {
+            font-size: 1.2em;
+            color: #333;
+        }
+        .cart-button {
+            background-color: #00BFFF;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        .cart-button:hover {
+            background-color: #0080B3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="C:\Users\Aluno\Desktop\CARIBBEAN COCONUT\_0275bfae-8a09-42cc-ab77-1d50decd6132-removebg-preview.png" alt="Logo" class="logo">
+        <img src="index-removebg-preview.png" alt="Título do site" class="title-image">
+        <div class="separator"></div>
+    </header>
+    
+    <nav>
+        <div class="nav-buttons">
+            <button class="nav-button" onclick="window.location.href='homepagecoco.html'">Home</button>
+            <button class="nav-button" onclick="window.location.href='sobre.html'">Sobre</button>
+            <button class="nav-button" onclick="window.location.href='servicos.html'">Serviços</button>
+        </div>
+        <div class="search-bar">
+            <input type="text" class="search-input" id="search-input" placeholder="Pesquisar...">
+            <button class="search-button" onclick="search()">Buscar</button>
+        </div>
+    </nav>
+    
+    <div class="introduction">
+        Bem-vindo ao "Caribbean Coconut"! Se você sonha em explorar as belezas exóticas do Caribe, está no lugar certo! Este site foi criado para fascinar você com uma das marcas mais deslumbrantes do mundo. 
+        Com suas praias de areia branca, águas cristalinas e uma cultura vibrante, o Caribe oferece uma experiência inesquecível para todos os tipos de pessoas.
+    </div>
+    
+    <div class="carousel">
+        <div class="carousel-video" id="video1">
+            <video autoplay loop muted>
+                <source src="202410030846.mp4" type="video/mp4">
+            </video>
+            <div class="carousel-text">Explore as maravilhas do Caribe!</div>
+            <button class="explore-button" onclick="window.location.href='explorar.html'">Explorar</button>
+        </div>
+        <div class="carousel-video" id="video2">
+            <video autoplay loop muted>
+                <source src="202410030836.mp4" type="video/mp4">
+            </video>
+            <div class="carousel-text">Descubra a rica cultura caribenha!</div>
+            <button class="explore-button" onclick="window.location.href='explorar.html'">Explorar</button>
+        </div>
+        <div class="carousel-video" id="video3">
+            <video autoplay loop muted>
+                <source src="videocaribe1.mp4.mp4" type="video/mp4">
+            </video>
+            <div class="carousel-text">Aventure-se em atividades emocionantes!</div>
+            <button class="explore-button" onclick="window.location.href='explorar.html'">Explorar</button>
+        </div>
+        <button class="carousel-button prev" onclick="prevSlide()">&#10094;</button>
+        <button class="carousel-button next" onclick="nextSlide()">&#10095;</button>
+    </div>
+
+    <main>
+        <section class="about-section" id="about-section">
+            O Caribe é um destino turístico de renome mundial, conhecido por suas praias paradisíacas e clima tropical. Com uma rica diversidade cultural e uma variedade de atividades emocionantes, há tantas maravilhas que você pode descobrir.
+        </section>
+        <button class="learn-more-button" id="learn-more-button" onclick="showAbout()">Saiba Mais</button>
+
+        <h2 style="text-align: center; margin: 40px 0 10px 0; font-family: 'Lora', serif;">Produtos em Destaque</h2>
+        <hr style="border: 1px solid #00BFFF; width: 50%; margin: 0 auto;">
+
+        <div class="card-container">
+            <div class="card">
+                <div class="image_container">
+                    <img src="ed3ecd7c-56f1-4c26-a739-3735738aed15.jpg" alt="Imagem 1" class="image">
+                </div>
+                <h3>Boné Bege de Lã Coqueiro Bordado</h3>
+                <p>Categoria: Boné; Material: Lã e Algodão; Tamanho: Diversos.</p>
+                <p class="price">R$ 100,00</p>
+                <button class="cart-button" onclick="window.location.href='carrinho.html'">Adicionar ao Carrinho</button>
+            </div>
+            <div class="card">
+                <div class="image_container">
+                    <img src="_70f79114-dbcc-4a33-9e12-2b1dcdd6e3c5.jpg" alt="Imagem 2" class="image">
+                </div>
+                <h3>Camisa Polo Coqueiro Bordado Verde Escuro</h3>
+                <p>Categoria: Camisa; Material: Algodão; Tamanho: Diversos.</p>
+                <p class="price">R$ 150,00</p>
+                <button class="cart-button" onclick="window.location.href='carrinho.html'">Adicionar ao Carrinho</button>
+            </div>
+            <div class="card">
+                <div class="image_container">
+                    <img src="_45a542c4-a5ec-4b9b-9fbf-3501caef7953.jpg" alt="Imagem 3" class="image">
+                </div>
+                <h3>Camisa Polo Coqueiro Bordado Branca</h3>
+                <p>Uma breve descrição do destino 3.</p>
+                <p class="price">R$ 200,00</p>
+                <button class="cart-button" onclick="window.location.href='carrinho.html'">Adicionar ao Carrinho</button>
+            </div>
+        </div>
+    </main>
+
+    <div style="border-top: 2px solid #00BFFF;"></div>
+
+    <footer style="background-color: #00BFFF; color: white; text-align: center; padding: 20px; margin-top: 20px;">
+        <img src="C:\Users\Aluno\Desktop\CARIBBEAN COCONUT\_0275bfae-8a09-42cc-ab77-1d50decd6132-removebg-preview.png" alt="Logo" style="float: left; height: 50px; margin-right: 10px;">
+        <p>&copy; 2024 Caribbean Coconut. Todos os direitos reservados.</p>
+        <p>Desenvolvido por [Mago-Pixel]</p>
+        <div>
+            <a href="sobre.html" style="color: white; text-decoration: none; margin: 0 10px;">Sobre nós</a>
+            <a href="contato.html" style="color: white; text-decoration: none; margin: 0 10px;">Contato</a>
+            <a href="privacidade.html" style="color: white; text-decoration: none; margin: 0 10px;">Política de Privacidade</a>
+        </div>
+    </footer>
+
+    <script>
+        let currentSlide = 0;
+        const videos = document.querySelectorAll('.carousel-video');
+        const texts = document.querySelectorAll('.carousel-text');
+        const aboutSection = document.getElementById('about-section');
+        const learnMoreButton = document.getElementById('learn-more-button');
+
+        function showSlide(index) {
+            videos.forEach((video, i) => {
+                video.style.display = (i === index) ? 'block' : 'none';
+            });
+            texts.forEach((text, i) => {
+                text.style.display = (i === index) ? 'block' : 'none';
+            });
+            const exploreButtons = document.querySelectorAll('.explore-button');
+            exploreButtons.forEach((button, i) => {
+                button.style.display = (i === index) ? 'block' : 'none';
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % videos.length;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + videos.length) % videos.length;
+            showSlide(currentSlide);
+        }
+
+        function showAbout() {
+            const isVisible = aboutSection.classList.toggle('visible');
+            learnMoreButton.textContent = isVisible ? 'Mostrar Menos' : 'Saiba Mais';
+            aboutSection.style.marginTop = isVisible ? '20px' : '0'; // Adiciona espaço acima se visível
+        }
+
+        function search() {
+            const query = document.getElementById('search-input').value;
+            alert('Você está buscando por: ' + query);
+            // Aqui você pode redirecionar ou fazer a busca real
+            // window.location.href = 'buscar.html?query=' + encodeURIComponent(query);
+        }
+
+        // Inicializa a apresentação de slides
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>
+
+
+
